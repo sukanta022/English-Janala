@@ -31,10 +31,22 @@ const displayLessonWords = (data) => {
     data.forEach(element => {
         const wordDiv = document.createElement("div");
         wordDiv.innerHTML = `
-            <div id="lesson-word" class="bg-white text-center p-14 space-y-4 shadow-md h-full">
-                <p class="font-bold text-3xl">${element.word}</p>
-                <p>Meaning /Pronounciation</p>
-                <p class="font-bangla font-semibold text-3xl text-[#18181B]">"${element.meaning} / ${element.pronunciation}"</p>
+            <div id="lesson-word" class="bg-white p-14 space-y-4 shadow-md h-full flex flex-col">
+                <p class="font-bold text-3xl text-center">${element.word}</p>
+                <p class="text-center">Meaning / Pronunciation</p>
+                <p class="font-bangla font-semibold text-3xl text-[#18181B] text-center">
+                    "${element.meaning} / ${element.pronunciation}"
+                </p>
+            
+            <!-- Flex container at bottom -->
+                <div class="flex justify-between items-center mt-auto pt-6">
+                    <button class="bg-[#1A91FF]/10 px-2 py-1 text-[#374957] text-2xl cursor-pointer hover:bg-[#1A91FF]/30">
+                    <i class="bi bi-info-circle-fill"></i>
+                    </button>
+                    <button class="bg-[#1A91FF]/10 px-2 py-1 text-[#374957] text-2xl cursor-pointer hover:bg-[#1A91FF]/30">
+                    <i class="bi bi-volume-up-fill"></i>
+                    </button>
+                </div>
             </div>
         `
         lessonWordsContainer.append(wordDiv);
