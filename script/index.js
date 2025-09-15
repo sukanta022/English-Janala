@@ -125,3 +125,21 @@ const displayLessonWords = (data) => {
 }
 
 displayLesson();
+
+document.getElementById("search-btn").addEventListener("click", () => {
+    removeClass();
+    const input = document.getElementById("input-value");
+    const searchValue = input.value.trim().toLowerCase();
+    console.log(searchValue);
+    url = "https://openapi.programming-hero.com/api/words/all";
+    fetch(url)
+        .then(res => res.json())
+        .then(data => {
+            const allwords = data.data;
+            const filterWords = allwords.filter((word) => 
+                word.word.toLowerCase().includes(searchValue)
+            );
+            displayLessonWords(filterWords);
+        })
+    
+})
