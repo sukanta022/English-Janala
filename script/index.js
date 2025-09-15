@@ -9,6 +9,35 @@ const removeClass = () =>{
     lsnbtns.forEach((lsnbtn) => lsnbtn.classList.remove("active"));
 }
 
+const loadWord = (id) => {
+    url = `https://openapi.programming-hero.com/api/word/${id}`;
+    fetch(url)
+        .then(res => res.json())
+        .then(data => loadWordDetails(data.data));
+    document.getElementById("my_modal_5").showModal();
+}
+
+const loadWordDetails = (data) => {
+    const wordDetailsContainer = document.getElementById("word-details-container");
+    wordDetailsContainer.innerHTML = "";
+    div = document.createElement("div");
+    div.innerHTML = `
+        <p class="font-semibold text-4xl mb-8">${data.word} (<i class="bi bi-mic-fill"></i> :${data.pronunciation})</p>
+
+            <p class="text-2xl space-y-3 mb-8"><span class="font-semibold">Meaning</span><br><span class="font-bangla">${data.meaning}</span></p>
+
+            <p class="text-2xl space-y-3 mb-8"><span class="font-semibold">Example</span><br><span class="text-[#000000]">${data.sentence}</span></p>
+
+            <p class="text-2xl mb-2 font-bangla">সমার্থক শব্দ গুলো</p>
+            <div class="text-[#000000] flex gap-3">
+                <p class="border border-[#D7E4EF] bg-[#EDF7FF] p-1">${data.synonyms[0]}</p>
+                <p class="border border-[#D7E4EF] bg-[#EDF7FF] p-1">${data.synonyms[1]}</p>
+                <p class="border border-[#D7E4EF] bg-[#EDF7FF] p-1">${data.synonyms[2]}</p>
+            </div>
+    `
+    wordDetailsContainer.append(div);
+}
+
 const lessonLevel = (level) =>{
     url = `https://openapi.programming-hero.com/api/level/${level}`;
     fetch(url)
@@ -62,7 +91,7 @@ const displayLessonWords = (data) => {
             
             <!-- Flex container at bottom -->
             <div class="flex justify-between items-center mt-auto pt-6">
-                <button class="bg-[#1A91FF]/10 px-2 py-1 text-[#374957] text-2xl cursor-pointer hover:bg-[#1A91FF]/30">
+                <button class="bg-[#1A91FF]/10 px-2 py-1 text-[#374957] text-2xl cursor-pointer hover:bg-[#1A91FF]/30" onclick="loadWord(${element.id})">
                 <i class="bi bi-info-circle-fill"></i>
                 </button>
                 <button class="bg-[#1A91FF]/10 px-2 py-1 text-[#374957] text-2xl cursor-pointer hover:bg-[#1A91FF]/30">
