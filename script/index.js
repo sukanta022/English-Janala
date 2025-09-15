@@ -9,6 +9,12 @@ const removeClass = () =>{
     lsnbtns.forEach((lsnbtn) => lsnbtn.classList.remove("active"));
 }
 
+function pronounceWord(word) {
+  const utterance = new SpeechSynthesisUtterance(word);
+  utterance.lang = "en-EN"; // English
+  window.speechSynthesis.speak(utterance);
+}
+
 const loadWord = (id) => {
     url = `https://openapi.programming-hero.com/api/word/${id}`;
     fetch(url)
@@ -108,7 +114,7 @@ const displayLessonWords = (data) => {
                 <button class="bg-[#1A91FF]/10 px-2 py-1 text-[#374957] text-2xl cursor-pointer hover:bg-[#1A91FF]/30" onclick="loadWord(${element.id})">
                 <i class="bi bi-info-circle-fill"></i>
                 </button>
-                <button class="bg-[#1A91FF]/10 px-2 py-1 text-[#374957] text-2xl cursor-pointer hover:bg-[#1A91FF]/30">
+                <button class="bg-[#1A91FF]/10 px-2 py-1 text-[#374957] text-2xl cursor-pointer hover:bg-[#1A91FF]/30 onclick="onclick="pronounceWord('${element.word}')">
                 <i class="bi bi-volume-up-fill"></i>
                 </button>
             </div>
